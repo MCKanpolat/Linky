@@ -25,6 +25,10 @@ Set up **Linky** like this:
     }
 ```
 
+Change the property name:
+
+`LinkyConfiguration.Configure(config, propName: "_myLinks");`
+
 Given this controller with the `LinksFrom` attribute on the `Get(int id)` action...
 
 ```csharp
@@ -79,7 +83,7 @@ This is the first cut of code, hacked together to get something working. It work
 (Forks and Pull Requests appreciated)
 
 * Configuration
-  * Allow customization of the JSON output formatting and `_links` property name
+  * Allow customization of the JSON output formatting
   * Allow override of the `Route` URI template in the `LinksFrom` attribute
   * Add a `QueryString` property to the `LinksFrom` attribute to allow parameters to be added to the URI
 * Tests
