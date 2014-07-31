@@ -8,7 +8,7 @@
 
     public static class LinkyConfiguration
     {
-        public static void Configure(HttpConfiguration config)
+        public static void Configure(HttpConfiguration config, string propName = null)
         {
             config.EnsureInitialized();
 
@@ -36,7 +36,7 @@
             }
 
             var json = config.Formatters.JsonFormatter;
-            json.SerializerSettings.ContractResolver = new LinkyContractResolver(table, json.SerializerSettings.ContractResolver);
+            json.SerializerSettings.ContractResolver = new LinkyContractResolver(table, json.SerializerSettings.ContractResolver, propName);
         }
     }
 }
