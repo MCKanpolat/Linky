@@ -9,10 +9,17 @@
     public class ShipsController : ApiController
     {
         // GET api/ships
-        [Route]
-        public IEnumerable<Ship> Get()
+        [Route, HttpGet]
+        [LinksFrom(typeof(ShipCollection), "next", Resolve = new []{"page", "NextPage"})]
+        [LinksFrom(typeof(ShipCollection), "previous", Resolve = new []{"page", "PreviousPage"})]
+        public ShipCollection List(int page = 1)
         {
-            return new[] {new Ship {Id = 1, Name = "Millennium Falcon"}, new Ship {Id = 42, Name = "Heart of Gold"}};
+            return new ShipCollection
+            {
+                Ships = new[] {new Ship {Id = 1, Name = "Millennium Falcon"}, new Ship {Id = 42, Name = "Heart of Gold"}},
+                NextPage = page + 1,
+                PreviousPage = page > 1 ? page - 1 : default(int?)
+            };
         }
 
         // GET api/ships/5

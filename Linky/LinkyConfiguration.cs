@@ -3,6 +3,7 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Net.Http.Formatting;
     using System.Web.Http;
@@ -28,7 +29,11 @@
                     {
                         foreach (var attribute in linksFromAttributes)
                         {
-                            table.Add(LinkBuilder.Create(attribute.ModelType, attribute.Rel, apiDescription.RelativePath, apiDescription.ParameterDescriptions));
+                            var linkBuilder = LinkBuilder.Create(attribute, apiDescription);
+                            if (linkBuilder != null)
+                            {
+                                table.Add(linkBuilder);
+                            }
                         }
                     }
                 }
@@ -64,6 +69,10 @@
 
             lock (_sync)
             {
+                if (_contracts.TryGetValue(type, out contract))
+                {
+                    return contract;
+                }
                 contract = _contractResolver.ResolveContract(type);
                 var objectContract = contract as JsonObjectContract;
                 if (objectContract != null)

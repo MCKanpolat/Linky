@@ -20,6 +20,7 @@
         {
             return _builders.Select(b => b.GetLink(target))
                 .Where(l => l != null)
+                .Distinct(Link.RelComparer)
                 .ToDictionary(l => l.Rel, l => l.Href);
         }
     }
