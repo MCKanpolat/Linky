@@ -15,7 +15,7 @@ namespace Linky
         public LinkyContractResolver(LinkTable table, IContractResolver contractResolver, string propName)
         {
             _table = table;
-            _propName = propName;
+            _propName = propName ?? "_links";
             _contractResolver = contractResolver ?? new DefaultContractResolver();
         }
 
@@ -41,7 +41,7 @@ namespace Linky
                         objectContract.Properties.AddProperty(new JsonProperty
                         {
                             PropertyType = typeof(IDictionary<string,string>),
-                            PropertyName = _propName ?? "_links",
+                            PropertyName = _propName,
                             ValueProvider = linkyValueProvider,
                             Readable = true
                         });

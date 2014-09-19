@@ -58,6 +58,7 @@
     <Compile Include="LinksFromAttribute.cs" />
     <Compile Include="LinkTable.cs" />
     <Compile Include="LinkyConfiguration.cs" />
+    <Compile Include="LinkyContractResolver.cs" />
     <Compile Include="LinkyValueProvider.cs" />
     <Compile Include="NullPropertyGetter.cs" />
     <Compile Include="PathPropertyGetter.cs" />
