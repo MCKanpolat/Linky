@@ -63,13 +63,13 @@ Given this controller with the `LinksFrom` attribute on the `Get(int id)` action
         "Id": 1,
         "Name": "Millennium Falcon",
         "_links": {
-            "self": "api/ships/1"
+            "self": "/api/ships/1"
         }
     }, {
         "Id": 42,
         "Name": "Heart of Gold",
         "_links": {
-            "self": "api/ships/42"
+            "self": "/api/ships/42"
         }
     }]
 ```
