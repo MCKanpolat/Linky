@@ -4,6 +4,7 @@ namespace Linky
     using System.Collections.Generic;
     using System.Reflection;
     using System.Text.RegularExpressions;
+    using Zudio.Sys.Annotations;
 
     internal abstract class PropertyGetterBase : ILinkPropertyGetter
     {

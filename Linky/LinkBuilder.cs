@@ -86,21 +86,8 @@
 
             foreach (var parameterDescription in apiDescription.ParameterDescriptions.Where(p => p.Source == ApiParameterSource.FromUri))
             {
-                PropertyInfo property = null;
-                if (attribute.Resolve != null)
-                {
-                    int resolveIndex = Array.FindIndex(attribute.Resolve, s => string.Equals(s, parameterDescription.Name, StringComparison.OrdinalIgnoreCase));
-                    if (resolveIndex >= 0)
-                    {
-                        property = attribute.ModelType.GetProperty(attribute.Resolve[resolveIndex + 1]);
-                    }
-                }
-
-                if (property == null)
-                {
-                    property = attribute.ModelType.GetProperties().FirstOrDefault(p => p.Name.Equals(parameterDescription.Name, StringComparison.OrdinalIgnoreCase));
-                }
-
+                var property =
+                    attribute.ModelType.GetProperties().FirstOrDefault(p => p.Name.Equals(parameterDescription.Name, StringComparison.OrdinalIgnoreCase));
                 var regex = new Regex(@"\{\*?" + parameterDescription.Name + @"[:\?]?.*?\}");
                 if (property != null)
                 {
@@ -147,6 +134,8 @@
             {
                 path = path + "?" + string.Join("&", queryStringList);
             }
+
+            if (!path.StartsWith("/")) path = "/" + path;
 
             return new Link(_rel, path);
         }

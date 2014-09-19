@@ -27,18 +27,11 @@
 
         public string[] Required { get; set; }
 
-        public string[] Resolve { get; set; }
+        public object Resolve { get; set; }
 
         public bool IsRequired(string parameterName)
         {
-            return (Required != null && Required.Contains(parameterName, StringComparer.OrdinalIgnoreCase))
-                   || !string.IsNullOrWhiteSpace(GetResolveProperty(parameterName));
-        }
-
-        public string GetResolveProperty(string parameterName)
-        {
-            if (Resolve == null) return null;
-            return Resolve.Where((s, i) => i%2 == 0 && string.Equals(s, parameterName, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+            return Required != null && Required.Contains(parameterName, StringComparer.OrdinalIgnoreCase);
         }
     }
 }
